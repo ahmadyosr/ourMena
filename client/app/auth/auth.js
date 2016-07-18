@@ -9,7 +9,7 @@ angular.module('GS.auth', [])
   $scope.signinUser = function () {
     Auth.signinUser($scope.user)
       .then(function (token) {
-        $window.localStorage.setItem('com.shortly', token);
+        $window.localStorage.setItem('com.GS', token);
         $location.path('/Users');
       })
       .catch(function (error) {
@@ -20,7 +20,7 @@ angular.module('GS.auth', [])
    $scope.signinServiceProvider = function () {
     Auth.signinServiceProvider($scope.user)
       .then(function (token) {
-        $window.localStorage.setItem('com.shortly', token);
+        $window.localStorage.setItem('com.GS', token);
         $location.path('/serviceprovider');
       })
       .catch(function (error) {
@@ -31,7 +31,7 @@ angular.module('GS.auth', [])
   $scope.signupUser = function () {
     Auth.signupUser($scope.user)
       .then(function (token) {
-        $window.localStorage.setItem('com.shortly', token);
+        $window.localStorage.setItem('com.GS', token);
         $location.path('/Users');
       })
       .catch(function (error) {
@@ -42,7 +42,7 @@ angular.module('GS.auth', [])
     $scope.signupServiceProvider = function () {
     Auth.signupServiceProvider($scope.user)
       .then(function (token) {
-        $window.localStorage.setItem('com.shortly', token);
+        $window.localStorage.setItem('com.GS', token);
         $location.path('/Users');
       })
       .catch(function (error) {

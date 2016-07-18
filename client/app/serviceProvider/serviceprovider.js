@@ -9,8 +9,9 @@ angular.module('GS.serviceProvider', [])
   	.catch(function(err){
   		console.error(err);
   	});
-  $scope.delete=function(index){
+  $scope.delivered=function(index){
   	console.log(index);
   	Services.delivered($scope.data.orders[index].order_id);//order_id depend on database
+    $scope.data.orders.splice(index, 1);
   }
 });
