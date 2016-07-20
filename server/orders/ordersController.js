@@ -7,7 +7,7 @@ var Order = require('./orderModel.js');
 var findOrder = Q.nbind(Order.findOne, Order);
 var createOrder = Q.nbind(Order.create, Order);
 var findAllOrders = Q.nbind(Order.find, Order);
-var findUser = Q.nbind(Order.findOne, User);
+var findUser = Q.nbind(User.findOne, User);
 var updateOrder = Q.nbind(Order.findOneAndUpdate, Order);
 
 module.exports = {

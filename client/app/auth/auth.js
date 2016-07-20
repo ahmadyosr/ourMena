@@ -3,7 +3,7 @@
 // in our signup/signin forms using the injected Auth service
 angular.module('GS.auth', [])
 
-.controller('AuthController', function ($scope, $window, $location) {
+.controller('AuthController', function ($scope, $window, $location, Auth) {
   $scope.user = {};
 
   $scope.signinUser = function () {
