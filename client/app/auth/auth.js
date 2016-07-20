@@ -3,13 +3,13 @@
 // in our signup/signin forms using the injected Auth service
 angular.module('GS.auth', [])
 
-.controller('AuthController', function ($scope, $window, $location, Auth) {
+.controller('AuthController', function ($scope, $window, $location) {
   $scope.user = {};
 
   $scope.signinUser = function () {
     Auth.signinUser($scope.user)
       .then(function (token) {
-        $window.localStorage.setItem('com.shortly', token);
+        $window.localStorage.setItem('com.GS', token);
         $location.path('/Users');
       })
       .catch(function (error) {
@@ -18,9 +18,9 @@ angular.module('GS.auth', [])
   };
 
    $scope.signinServiceProvider = function () {
-    Auth.signinUser($scope.user)
+    Auth.signinServiceProvider($scope.user)
       .then(function (token) {
-        $window.localStorage.setItem('com.shortly', token);
+        $window.localStorage.setItem('com.GS', token);
         $location.path('/serviceprovider');
       })
       .catch(function (error) {
@@ -29,9 +29,9 @@ angular.module('GS.auth', [])
   };
 
   $scope.signupUser = function () {
-    Auth.signup($scope.user)
+    Auth.signupUser($scope.user)
       .then(function (token) {
-        $window.localStorage.setItem('com.shortly', token);
+        $window.localStorage.setItem('com.GS', token);
         $location.path('/Users');
       })
       .catch(function (error) {
@@ -40,9 +40,9 @@ angular.module('GS.auth', [])
   };
 
     $scope.signupServiceProvider = function () {
-    Auth.signup($scope.user)
+    Auth.signupServiceProvider($scope.user)
       .then(function (token) {
-        $window.localStorage.setItem('com.shortly', token);
+        $window.localStorage.setItem('com.GS', token);
         $location.path('/Users');
       })
       .catch(function (error) {
