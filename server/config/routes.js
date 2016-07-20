@@ -1,10 +1,10 @@
 var ordersController = require('../orders/ordersController.js');
 var userController = require('../users/userController.js');
-var serviceProviderController = require('../users/serviceProviderController.js');
+var serviceProviderController = require('../providers/providerController.js');
 var helpers = require('./helpers.js'); // our custom middleware
 
 module.exports = function (app, express) {
-  app.get('/:code', linksController.navToLink);
+  // app.get('/:code', linksController.navToLink);
 
   app.post('/api/users/signinUsers', userController.signinAsUser);
   app.post('/api/users/signupUsers', userController.signupAsUser);
