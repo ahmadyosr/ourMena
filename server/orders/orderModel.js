@@ -1,25 +1,20 @@
 var mongoose = require('mongoose');
-var crypto = require('crypto');
 
-var LinkSchema = new mongoose.Schema({
- visits: Number,
- link: String,
- title: String,
- code: String,
- base_url: String,
- url: String
+var OrderSchema = new mongoose.Schema({
+ serviceType: {
+ 	type: String
+ },
+ quantity: {
+ 	type: String
+ },
+ username: {
+ 	type: String
+ },
+ totalPrice: {
+ 	type: String
+ }
 });
 
-var createSha = function (url) {
-  var shasum = crypto.createHash('sha1');
-  shasum.update(url);
-  return shasum.digest('hex').slice(0, 5);
-};
 
-LinkSchema.pre('save', function (next) {
-  var code = createSha(this.url);
-  this.code = code;
-  next();
-});
 
-module.exports = mongoose.model('orders', LinkSchema);
+module.exports = mongoose.model('orders', OrderSchema);

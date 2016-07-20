@@ -4,17 +4,16 @@ var serviceProviderController = require('../providers/providerController.js');
 var helpers = require('./helpers.js'); // our custom middleware
 
 module.exports = function (app, express) {
-  // app.get('/:code', linksController.navToLink);
 
   app.post('/api/users/signinUsers', userController.signinAsUser);
   app.post('/api/users/signupUsers', userController.signupAsUser);
   app.get('/api/users/signedinUser', userController.checkAuthUser);
-  app.post('/api/users/signinServiceProvider', serviceProviderController.signinServiceProvider);
-  app.post('/api/users/signupServiceProvider', serviceProviderController.signupServiceProvider);
+  app.post('/api/users/signinServiceProvider', serviceProviderController.signinAsServiceProvider);
+  app.post('/api/users/signupServiceProvider', serviceProviderController.signupAsProvider);
 
   // authentication middleware used to decode token and made available on the request
   // app.use('/api/links', helpers.decode);
-  app.get('/api/orders/', ordersController.allOrder);
+  app.get('/api/orders/', ordersController.allOrders);
   app.post('/api/order/', ordersController.newOrder);
   app.post('/api/delivered', ordersController.delivered)
 
