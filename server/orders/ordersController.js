@@ -7,7 +7,7 @@ var Order = require('./orderModel.js');
 var findOrder = Q.nbind(Order.findOne, Order);
 var createOrder = Q.nbind(Order.create, Order);
 var findAllOrders = Q.nbind(Order.find, Order);
-var findUser = Q.nbind(Order.findOne, User);
+var findUser = Q.nbind(User.findOne, User);
 var updateOrder = Q.nbind(Order.findOneAndUpdate, Order);
 
 module.exports = {
@@ -20,12 +20,16 @@ module.exports = {
         findUser({username: orders[i].username})
         .then(function (user) {
           if(user){
+            console.log(orders)
+            
+
             orders[i].fullName = user.fullName;
             orders[i].phoneNumber = user.phoneNumber;
             orders[i].address = user.address;
+            console.log('adsfadfasdfadfasdfa',orders[i].username)
           }
         })
-      }
+      }console.log(orders[3].quantity)
       res.json(orders);
     })
     .fail(function (error) {
@@ -34,12 +38,12 @@ module.exports = {
   },
 
   newOrder: function (req, res, next) {
-    var type = req.body.type;
+    var serviceType = req.body.serviceType;
     var quantity = req.body.quantity;
     var username = req.body.username;
     var totalPrice = req.body.totalPrice;
     var newOrder = {
-            type: type,
+            serviceType: serviceType,
             quantity: quantity,
             username: username,
             totalPrice: totalPrice
