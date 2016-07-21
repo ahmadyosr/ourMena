@@ -9,10 +9,10 @@
 		<th></th>
 	</tr>
 	<tr ng-repeat="order in data.orders" onclick="location()">
-		<td>{{order.fullname}}</td>
+		<td>{{order.fullName}}</td>
 		<td>{{order.phoneNumber}}</td>
 		<td>{{order.address}}</td>
-		<td>{{order.quentity}}</td>
+		<td>{{order.quantity}}</td>
 		<td>{{order.orderDate}}</td>
 		<td>{{order.totalPrice}}</td>
 		<td><a ng-click="delivered($index)">delivered</a></td>

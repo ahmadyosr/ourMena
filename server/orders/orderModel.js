@@ -7,11 +7,19 @@ var OrderSchema = new mongoose.Schema({
  quantity: {
  	type: String
  },
- username: {
- 	type: String
- },
  totalPrice: {
  	type: String
+ },
+ // delievered: {
+ // 	type:Boolean,
+ // 	default:false
+ // },
+ fullName:String,
+ address:String,
+ phoneNumber:Number,
+ orderDate:{
+ 	type:Date,
+ 	default:12/3/2015
  }
 });
 

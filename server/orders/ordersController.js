@@ -9,27 +9,13 @@ var createOrder = Q.nbind(Order.create, Order);
 var findAllOrders = Q.nbind(Order.find, Order);
 var findUser = Q.nbind(User.findOne, User);
 var updateOrder = Q.nbind(Order.findOneAndUpdate, Order);
-
 module.exports = {
 
   allOrders: function (req, res, next) {
-
+  //var user = req.user;
+  //var arr=[];
   findAllOrders({})
     .then(function (orders) {
-      for (var i = 0; i < orders.length; i++) {
-        findUser({username: orders[i].username})
-        .then(function (user) {
-          if(user){
-            console.log(orders)
-            
-
-            orders[i].fullName = user.fullName;
-            orders[i].phoneNumber = user.phoneNumber;
-            orders[i].address = user.address;
-            console.log('adsfadfasdfadfasdfa',orders[i].username)
-          }
-        })
-      }console.log(orders[3].quantity)
       res.json(orders);
     })
     .fail(function (error) {
@@ -40,13 +26,22 @@ module.exports = {
   newOrder: function (req, res, next) {
     var serviceType = req.body.serviceType;
     var quantity = req.body.quantity;
-    var username = req.body.username;
+    var username = req.user.username;
+    var fullName=req.user.fullName;
+    var address=req.user.address;
+    var phoneNumber=req.user.phoneNumber;
+    var orderDate=Date();
     var totalPrice = req.body.totalPrice;
     var newOrder = {
             serviceType: serviceType,
             quantity: quantity,
+            fullName:fullName,
+            address:address,
+            phoneNumber:phoneNumber,
             username: username,
-            totalPrice: totalPrice
+            totalPrice: totalPrice,
+            orderDate:orderDate,
+            delivered:"false"
           };
     createOrder(newOrder)
     .then(function (createdOrder) {
@@ -62,11 +57,11 @@ module.exports = {
   delivered: function(req, res, next) {
     // find the order and change the delivered
     var order_id=req.body.order_id;
-    findOneAndUpdate({order_id:order_id},{$set:{delivered:"true"}},function(err,doc){
+    updateOrder({order_id:order_id},{$set:{delivered:"true"}},function(err,doc){
       if(err){
         console.log("Something wrong when updating data!");
     }
-    console.log(doc);
+    console.log("dooooc",doc);
     })
   }
 };
