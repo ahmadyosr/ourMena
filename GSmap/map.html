@@ -7,8 +7,9 @@
 	<script
 	  src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
 	<script
-	  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyATwz-5JuqDmx4C3_sdm6DR0l9OQYGVyps"></script>
-	<script type="text/javascript" src="map.js"></script>
+	  src="http://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyATwz-5JuqDmx4C3_sdm6DR0l9OQYGVyps"></script>  
+
+  <script type="text/javascript" src="map.js"></script>
 </head>
 
 <body>
@@ -16,10 +17,12 @@
   <div ng-app="mapsApp" ng-controller="MapCtrl">
     <div id="map"></div>
     <div id="class" >
-   <!--  <div id="class" ng-repeat="marker in markers | orderBy : 'createdAt'"> -->
-      
-<!--       <a href="#" ng-click="openInfoWindow($event, marker)">{{marker.user +' '+ marker.address +' '+ marker.phone }}</a> -->
-<!-- Orders Table  -->
+    <div id="userLocation">
+      <h1>your location is:</h1>
+      <input type="text" id="lat">
+      <input type="text" id="lng">
+    </div>
+   
 <table >
   <tr>
     <th>User</th>

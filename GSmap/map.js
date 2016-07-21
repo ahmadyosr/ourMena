@@ -1,10 +1,27 @@
+var serProv = [{
+  userName : 'Gas provider 1',
+  address : "Amman - 8th circle",
+  center: {lat: 31.973715, lng: 35.8375179},
+  radius: 3000,
+  strokeColor: "red",
+  fillColor: "red"
+},
+{
+  userName : 'Water provider 1',
+  address : "Amman - 8th circle",
+  center: {lat: 31.975715, lng: 35.8377179},
+  radius: 4000,
+  strokeColor: "blue",
+  fillColor: "blue"
+}]
+
 var users = [{
   userName: 'Aws',
   address: "street name / building 1/ apartment 1",
   phone: 0790000000,
   order: 'order details',
-  lat: 31.971715,
-  long: 35.8355179,
+  lat: 32.002485,
+  long: 35.876858,
   createdAt: Date()
 }, {
   userName: 'Husssam',
@@ -45,6 +62,23 @@ angular.module('mapsApp', [])
 
     $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+
+// service provider radius--------
+  for (var i =0; i<serProv.length; i++) {
+            // Add the circle for this city to the map.
+            serProv.serProvCircle = new google.maps.Circle({
+              strokeColor: serProv[i].strokeColor,
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: serProv[i].fillColor,
+              fillOpacity: 0.07,
+              map: $scope.map,
+              center: serProv[i].center,
+              radius: serProv[i].radius
+            });
+          }
+//--------
+
     $scope.markers = [];
 
     var infoWindow = new google.maps.InfoWindow();
@@ -64,7 +98,7 @@ angular.module('mapsApp', [])
         infoWindow.setContent('<h2>' + marker.user + '</h2>' + marker.content);
         infoWindow.open($scope.map, marker);
       });
-
+      // if marker 
       $scope.markers.push(marker);
 
     }
@@ -78,5 +112,45 @@ angular.module('mapsApp', [])
       google.maps.event.trigger(selectedMarker, 'click');
     }
 
-  });
 
+    // take user location from the device
+    if (navigator.geolocation) {
+          alert('your location is under process');
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            console.log(pos.lat);
+            console.log(pos.lng);
+            var userLat = document.getElementById('lat');
+            userLat.value = pos.lat;
+            var userLng = document.getElementById('lng')
+            userLng.value = pos.lng;
+          }); 
+        } else {
+          // Browser doesn't support Geolocation
+          alert('your browser dos not support the geolocation');
+        }
+//------------------
+
+// calculate if point inside circle
+/*var point = {lat: users[1].lat,
+  lng : users[1].lng};
+var circle = serProv[0].center;     
+*/
+
+var point = {lat: 31.973715, lng: 35.8375179};
+var circle = {lat: 31.973715, lng: 35.8375179};
+var r = 3000;
+var circleContainsLocation = function(point, circle)
+{
+    // var radius = serProv[0].radius;
+    //var center = circle.getCenter();
+    return ($scope.map.geometry.spherical.computeDistanceBetween(point, center) <= r)
+}
+
+var flag = circleContainsLocation(point, circle);
+console.log(flag);
+
+  });
