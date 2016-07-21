@@ -7,20 +7,34 @@ var SALT_WORK_FACTOR = 10;
 var ProviderSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
-
   password: {
     type: String,
     required: true
   },
-  fullName:String,
-  serviceType:String,
-  price:Number,
-  phoneNumber:Number,
-  address:String
+  fullName: {
+    type: String,
+    required: true
+  },
+  serviceType: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
+    required: true
+  },
+  phoneNumber: {
+    type: Number,
+    required: true
+  },
+  address: {
+    type: String,
+    required: true
+  }
 });
+
 
 ProviderSchema.methods.comparePasswords = function (candidatePassword) {
   var savedPassword = this.password;

@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 var app = express();
 
-mongoose.connect('mongodb://localhost/greenservices');
+mongoose.connect('mongodb://localhost/greenservice');
 
 // configure our server with all the middleware and routing
 require('./config/middleware.js')(app, express);
