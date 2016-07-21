@@ -10,16 +10,16 @@ var OrderSchema = new mongoose.Schema({
  totalPrice: {
  	type: String
  },
- // delievered: {
- // 	type:Boolean,
- // 	default:false
- // },
+ delivered: {
+ 	type:Boolean,
+ 	default: false
+ },
  fullName:String,
  address:String,
  phoneNumber:Number,
  orderDate:{
  	type:Date,
- 	default:12/3/2015
+ 	default:Date.now
  }
 });
 

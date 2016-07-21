@@ -1,9 +1,7 @@
 var Order = require('./orderModel.js');
    User=require('../users/userModel.js')
     Q = require('q');
-    // util = require('../config/utils.js');
-
-// Promisify a few mongoose methods with the `q` promise library
+    
 var findOrder = Q.nbind(Order.findOne, Order);
 var createOrder = Q.nbind(Order.create, Order);
 var findAllOrders = Q.nbind(Order.find, Order);
@@ -12,9 +10,7 @@ var updateOrder = Q.nbind(Order.findOneAndUpdate, Order);
 module.exports = {
 
   allOrders: function (req, res, next) {
-  //var user = req.user;
-  //var arr=[];
-  findAllOrders({})
+  findAllOrders({delivered: false})
     .then(function (orders) {
       res.json(orders);
     })
@@ -30,7 +26,7 @@ module.exports = {
     var fullName=req.user.fullName;
     var address=req.user.address;
     var phoneNumber=req.user.phoneNumber;
-    var orderDate=Date();
+    var orderDate = new Date();
     var totalPrice = req.body.totalPrice;
     var newOrder = {
             serviceType: serviceType,
@@ -40,7 +36,7 @@ module.exports = {
             phoneNumber:phoneNumber,
             username: username,
             totalPrice: totalPrice,
-            orderDate:orderDate,
+            
             delivered:"false"
           };
     createOrder(newOrder)

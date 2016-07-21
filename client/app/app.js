@@ -42,7 +42,7 @@ angular.module('GS', [
   // then add it to the header so the server can validate the request
   var attach = {
     request: function (object) {
-      var jwt = $window.localStorage.getItem('com.GS');
+      var jwt = $window.localStorage.getItem('com.GSuser');
       if (jwt) {
         object.headers['x-access-token'] = jwt;
       }
@@ -61,8 +61,11 @@ angular.module('GS', [
   // and send that token to the server to see if it is a real user or hasn't expired
   // if it's not valid, we then redirect back to signin/signup
   $rootScope.$on('$routeChangeStart', function (evt, next, current) {
-    if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
+    if (next.$$route && next.$$route.authenticate && !Auth.isAuthuser()) {
       $location.path('/signinAsUser');
+    } 
+    if(next.$$route && next.$$route.authenticate && !Auth.isAuthprovider()){
+      $location.path('/signinAsserviceProvider');
     }
   });
 });

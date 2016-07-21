@@ -91,12 +91,19 @@ return {
     });
   };
 
-  var isAuth = function () {
-    return !!$window.localStorage.getItem('com.GS');
+  var isAuthuser = function () {
+    return !!$window.localStorage.getItem('com.GSuser');
+  };
+  var isAuthprovider = function () {
+    return !!$window.localStorage.getItem('com.GSprovider');
   };
 
-  var signout = function () {
-    $window.localStorage.removeItem('com.GS');
+  var signoutUser = function () {
+    $window.localStorage.removeItem('com.GSuser');
+    $location.path('/');
+  };
+  var signoutProvider = function () {
+    $window.localStorage.removeItem('com.GSuser');
     $location.path('/');
   };
 
@@ -106,7 +113,9 @@ return {
     signupUser: signupUser,
     signinServiceProvider: signinServiceProvider,
     signupServiceProvider: signupServiceProvider,
-    isAuth: isAuth,
-    signout: signout
+    isAuthuser: isAuthuser,
+    isAuthprovider: isAuthprovider,
+    signoutUser: signoutUser,
+    signoutProvider: signoutProvider
   };
 });
