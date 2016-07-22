@@ -20,7 +20,8 @@ var OrderSchema = new mongoose.Schema({
  orderDate:{
  	type:Date,
  	default:Date.now
- }
+ },
+ userLocation: Object
 });
 
 

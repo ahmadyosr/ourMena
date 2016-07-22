@@ -27,6 +27,7 @@ module.exports = {
     var address=req.user.address;
     var phoneNumber=req.user.phoneNumber;
     var orderDate = new Date();
+    var userLocation= req.body.userLocation;
     var totalPrice = req.body.totalPrice;
     var newOrder = {
             serviceType: serviceType,
@@ -36,7 +37,7 @@ module.exports = {
             phoneNumber:phoneNumber,
             username: username,
             totalPrice: totalPrice,
-            
+            userLocation: userLocation,
             delivered:"false"
           };
     createOrder(newOrder)
@@ -52,8 +53,8 @@ module.exports = {
 
   delivered: function(req, res, next) {
     // find the order and change the delivered
-    var order_id=req.body.order_id;
-    updateOrder({order_id:order_id},{$set:{delivered:"true"}},function(err,doc){
+    var order_id = req.body.order_id;
+    updateOrder({_id:order_id},{$set:{delivered:"true"}},function(err,doc){
       if(err){
         console.log("Something wrong when updating data!");
     }

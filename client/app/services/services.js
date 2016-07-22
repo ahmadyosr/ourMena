@@ -29,7 +29,7 @@ return {
     return $http({
       method: 'POST',
       url: '/api/delivered',
-      data: JSON.stringify(order_id)
+      data: JSON.stringify({order_id: order_id})
     })
     .then(function (resp) {
       return resp;

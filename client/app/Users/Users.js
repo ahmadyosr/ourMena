@@ -25,7 +25,6 @@ angular.module('GS.Users', [])
     $scope.order.totalPrice = parseInt($scope.order.quantity) * prices[$scope.order.serviceType];
   $scope.addOrder=function(){
   	Orders.addOneOrder($scope.order).then(function(){
-      //console.log($scope.order)
   	})
   	.catch(function(err){
   		console.log(err);
