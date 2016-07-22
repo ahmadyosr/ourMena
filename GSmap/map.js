@@ -20,8 +20,8 @@ var users = [{
   address: "street name / building 1/ apartment 1",
   phone: 0790000000,
   order: 'order details',
-  lat: 32.002485,
-  long: 35.876858,
+  lat: 32.0141243,
+  long: 35.8688515,
   createdAt: Date()
 }, {
   userName: 'Husssam',
@@ -131,25 +131,27 @@ angular.module('GS.map', [])
           // Browser doesn't support Geolocation
           alert('your browser dos not support the geolocation');
         }
-//------------------
 
-// calculate if point inside circle
-/*var point = {lat: users[1].lat,
-  lng : users[1].lng};
-var circle = serProv[0].center;     
-*/
 
-// var point = {lat: 31.973715, lng: 35.8375179};
-// var circle = {lat: 31.973715, lng: 35.8375179};
-// var r = 3000;
-// var circleContainsLocation = function(point, circle)
-// {
-//     // var radius = serProv[0].radius;
-//     //var center = circle.getCenter();
-//     return ($scope.map.geometry.spherical.computeDistanceBetween(point, center) <= r)
-// }
 
-// var flag = circleContainsLocation(point, circle);
-// console.log(flag);
+      
+      // calculate if the new user's location inside one service provider if so return the name of the service provider else sorry
+        //newUser outside the service area
+      var newUser = {lat: 32.0141243, long: 35.8688515}
+        //newUser inside the service area
+      //var newUser = {lat: 31.975715, long: 35.8395179}
+      $scope.userInSerProArea = function (/*newUser, serProv*/){
+        var userLatLng = new google.maps.LatLng(newUser.lat, newUser.long);
+        for (var i = 0; i < serProv.length; i++) {
+          var providerCenter = new google.maps.LatLng(serProv[i].center.lat, serProv[i].center.lng);
+          var serProvRadius = serProv[i].radius
+          var dist = google.maps.geometry.spherical.computeDistanceBetween(userLatLng, providerCenter)<= serProvRadius;  
+          if (dist){
+            console.log('newUser within the radius of: ', serProv[i].userName)
+          } 
+        }
+            console.log('Our service circle is growing up, come and try later, Sorry.');
+        
+      }
 
   });
