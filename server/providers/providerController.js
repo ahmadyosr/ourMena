@@ -40,6 +40,9 @@ module.exports = {
     var price = req.body.price;
     var phoneNumber = req.body.phoneNumber;
     var address = req.body.address;
+    var center = req.body.center;
+    var radius = req.body.area;
+    console.log(center, radius)
 
 
     // check to see if user already exists
@@ -56,7 +59,9 @@ module.exports = {
             serviceType: serviceType,
             price: price,
             phoneNumber: phoneNumber,
-            address: address
+            address: address,
+            center: center,
+            radius: radius
           });
         }
       })

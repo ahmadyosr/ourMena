@@ -32,7 +32,9 @@ var ProviderSchema = new mongoose.Schema({
   address: {
     type: String,
     required: true
-  }
+  },
+  center: Object,
+  radius: Number
 });
 
 

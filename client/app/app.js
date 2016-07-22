@@ -31,6 +31,10 @@ angular.module('GS', [
        templateUrl: 'app/serviceProvider/serviceprovider.html',
        controller: 'serviceproviderController'
     })
+    // .when('/map', {
+    //   templateUrl: '../../GSmap/map.html',
+    //   controller: 'MapController'
+    // })
     // We add our $httpInterceptor into the array
     // of interceptors. Think of it like middleware for your ajax calls
     $httpProvider.interceptors.push('AttachTokens');

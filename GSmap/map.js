@@ -51,8 +51,8 @@ var users = [{
 ];
 
 //Angular App Module and Controller
-angular.module('mapsApp', [])
-  .controller('MapCtrl', function($scope) {
+angular.module('GS.map', [])
+  .controller('MapController', function($scope) {
 
     var mapOptions = {
       zoom: 15,
@@ -115,7 +115,6 @@ angular.module('mapsApp', [])
 
     // take user location from the device
     if (navigator.geolocation) {
-          alert('your location is under process');
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
               lat: position.coords.latitude,
@@ -140,17 +139,17 @@ angular.module('mapsApp', [])
 var circle = serProv[0].center;     
 */
 
-var point = {lat: 31.973715, lng: 35.8375179};
-var circle = {lat: 31.973715, lng: 35.8375179};
-var r = 3000;
-var circleContainsLocation = function(point, circle)
-{
-    // var radius = serProv[0].radius;
-    //var center = circle.getCenter();
-    return ($scope.map.geometry.spherical.computeDistanceBetween(point, center) <= r)
-}
+// var point = {lat: 31.973715, lng: 35.8375179};
+// var circle = {lat: 31.973715, lng: 35.8375179};
+// var r = 3000;
+// var circleContainsLocation = function(point, circle)
+// {
+//     // var radius = serProv[0].radius;
+//     //var center = circle.getCenter();
+//     return ($scope.map.geometry.spherical.computeDistanceBetween(point, center) <= r)
+// }
 
-var flag = circleContainsLocation(point, circle);
-console.log(flag);
+// var flag = circleContainsLocation(point, circle);
+// console.log(flag);
 
   });

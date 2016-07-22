@@ -40,13 +40,27 @@ angular.module('GS.auth', [])
   };
 
     $scope.signupServiceProvider = function () {
-    Auth.signupServiceProvider($scope.user)
-      .then(function (token) {
-        $window.localStorage.setItem('com.GSprovider', token);
-        $location.path('/serviceProvider');
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+       if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            $scope.user.center = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+          }); 
+        } else {
+          // Browser doesn't support Geolocation
+          alert('your browser dos not support the geolocation');
+        }
+        setTimeout(function () {
+          Auth.signupServiceProvider($scope.user)
+          .then(function (token) {
+            $window.localStorage.setItem('com.GSprovider', token);
+            $location.path('/serviceProvider');
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+        }, 3000)
+      
   };
 });
