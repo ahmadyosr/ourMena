@@ -1,14 +1,12 @@
 angular.module('GS.serviceProvider', [])
 
-.controller('serviceproviderController', function ($scope, Services) {
+.controller('serviceproviderController', function ($scope, $window, Services) {
   $scope.data={};
   $scope.markers = [];
-  var mapOptions = {
-      zoom: 13,
-      center: new google.maps.LatLng(31.971715, 35.8355179),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-  $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  Services.getSPInfo($window.localStorage.getItem('com.GSprovider')).then(function (SP) {
+    $scope.serviceType = SP.data.serviceType;
+    $scope.center = SP.data.center;
+    $scope.radius = SP.data.radius;
     var serProvCircle = new google.maps.Circle({
       strokeColor: 'green',
       strokeOpacity: 0.8,
@@ -16,20 +14,29 @@ angular.module('GS.serviceProvider', [])
       fillColor: 'green',
       fillOpacity: 0.07,
       map: $scope.map,
-      center: {lat: 31.971715, lng: 35.8355179 },
-      radius: 3000
+      center: {lat: $scope.center.lat, lng: $scope.center.lng },
+      radius: $scope.radius
     });
-  	
-    Services.getAllOrders().then(function(data){
-  		$scope.data.orders=data.data;
+
+    Services.getAllOrders($scope.serviceType).then(function(data){
+      $scope.data.orders=data.data;
       for (i = 0; i < data.data.length; i++) {
         createMarker(data.data[i]);
       }
       console.log(data.data)
-  	})
-  	.catch(function(err){
-  		console.error(err);
-  	});
+    })
+    .catch(function(err){
+      console.error(err);
+    });
+  })
+  var mapOptions = {
+      zoom: 13,
+      center: new google.maps.LatLng(31.971715, 35.8355179),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+  $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    
+    
   $scope.delivered = function(index){
   	console.log(index);
   	Services.delivered($scope.data.orders[index]._id);//order_id depend on database

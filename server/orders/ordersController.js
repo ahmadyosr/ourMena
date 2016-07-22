@@ -10,7 +10,8 @@ var updateOrder = Q.nbind(Order.findOneAndUpdate, Order);
 module.exports = {
 
   allOrders: function (req, res, next) {
-  findAllOrders({delivered: false})
+    console.log('asdfasdf', req.body.serviceType)
+  findAllOrders({delivered: false, serviceType: req.body.serviceType})
     .then(function (orders) {
       res.json(orders);
     })

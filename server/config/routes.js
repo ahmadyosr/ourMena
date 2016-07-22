@@ -13,8 +13,9 @@ module.exports = function (app, express) {
 
   // authentication middleware used to decode token and made available on the request
   //app.use('/api/user', helpers.decode);
-  app.get('/api/orders/', helpers.decode, ordersController.allOrders);
+  app.post('/api/orders/', ordersController.allOrders);
   app.post('/api/order/', helpers.decode, ordersController.newOrder);
+  app.post('/api/SPinfo', serviceProviderController.getSPinfo);
   app.post('/api/delivered', ordersController.delivered)
 
   // If a request is sent somewhere other than the routes above,

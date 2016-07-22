@@ -8,6 +8,16 @@ var findProvider = Q.nbind(Provider.findOne, Provider);
 
 module.exports = {
 
+  getSPinfo: function (req, res, next) {
+    var user = jwt.decode(req.body.token, 'secret');
+    console.log(user)
+    res.json({
+      center: user.center,
+      radius: user.radius,
+      serviceType: user.serviceType
+    })
+  },
+
   signinAsServiceProvider: function (req, res, next) {
     var username = req.body.providerName;
     var password = req.body.password;

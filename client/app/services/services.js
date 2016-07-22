@@ -18,14 +18,28 @@ return {
   };
 })
 .factory('Services',function($http){
-  var getAllOrders = function(){
+  var getAllOrders = function(serviceType){
+    console.log(serviceType)
     return $http({
-      method:'GET',
-      url:'/api/orders'
+      method:'POST',
+      url:'/api/orders',
+      data: {serviceType: serviceType}
+    })
+    .then(function (resp) {
+      return resp;
+    })
+  }
+  var getSPInfo = function (token) {
+    return $http({
+      method: 'POST',
+      url: '/api/SPinfo',
+      data: {token:token}
+    })
+    .then(function (resp) {
+      return resp;
     })
   }
   var delivered = function (order_id) {
-    console.log(order_id)
     return $http({
       method: 'POST',
       url: '/api/delivered',
@@ -37,7 +51,8 @@ return {
   } 
   return {
     delivered:delivered,
-    getAllOrders:getAllOrders
+    getAllOrders:getAllOrders,
+    getSPInfo: getSPInfo
   }
 })
 .factory('Auth', function ($http, $location, $window) {
