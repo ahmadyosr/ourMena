@@ -5,7 +5,12 @@ angular.module('GS.auth', [])
 
 .controller('AuthController', function ($scope, $window, $location, Auth) {
   $scope.user = {};
-
+  var mapOptions = {
+      zoom: 13,
+      center: new google.maps.LatLng(31.971715, 35.8355179),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+  $scope.map = new google.maps.Map(document.getElementById('leftMap'), mapOptions);
   $scope.signinUser = function () {
     Auth.signinUser($scope.user)
       .then(function (token) {
