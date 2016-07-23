@@ -11,6 +11,7 @@ angular.module('GS.auth', [])
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
   $scope.map = new google.maps.Map(document.getElementById('leftMap'), mapOptions);
+  ////this function checks if the user exist and return the token
   $scope.signinUser = function () {
     Auth.signinUser($scope.user)
       .then(function (token) {
@@ -21,7 +22,7 @@ angular.module('GS.auth', [])
         console.error(error);
       });
   };
-
+    ////this function checks if the provider exist and return the token
    $scope.signinServiceProvider = function () {
     Auth.signinServiceProvider($scope.user)
       .then(function (token) {
@@ -32,7 +33,7 @@ angular.module('GS.auth', [])
         console.error(error);
       });
   };
-
+  /////add new user and create new token.
   $scope.signupUser = function () {
     Auth.signupUser($scope.user)
       .then(function (token) {
@@ -43,7 +44,8 @@ angular.module('GS.auth', [])
         console.error(error);
       });
   };
-
+    /////add new provider and create new token.
+    ////but before sign up it will take the provider location in order to determine the area the provider service.
     $scope.signupServiceProvider = function () {
        if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
