@@ -126,12 +126,12 @@ return {
   ///this function will execute each time the user sign out it will remove the token so it is ready to sign in as another user.
   var signoutUser = function () {
     $window.localStorage.removeItem('com.GSuser');
-    $location.path('/');
+    $location.path('/signinAsUser');
   };
   ///this function will execute each time the provider sign out it will remove the token so it is ready to sign in as another provider.
   var signoutProvider = function () {
     $window.localStorage.removeItem('com.GSprovider');
-    $location.path('/');
+    $location.path('/signinAsserviceProvider');
   };
 
 

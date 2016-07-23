@@ -1,5 +1,4 @@
-# green-services
-​
+# providers
 To run this application for users:
 npm install to install all dependances in package.json file.
 creating directory for database in terminal or CMD (windows) using mkdir command.
