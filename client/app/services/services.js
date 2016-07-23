@@ -118,7 +118,7 @@ return {
     $location.path('/');
   };
   var signoutProvider = function () {
-    $window.localStorage.removeItem('com.GSuser');
+    $window.localStorage.removeItem('com.GSprovider');
     $location.path('/');
   };
 

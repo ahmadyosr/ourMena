@@ -1,6 +1,6 @@
 angular.module('GS.serviceProvider', [])
 
-.controller('serviceproviderController', function ($scope, $window, Services) {
+.controller('serviceproviderController', function ($scope, $window, Auth, Services) {
   $scope.data={};
   $scope.markers = [];
   Services.getSPInfo($window.localStorage.getItem('com.GSprovider')).then(function (SP) {
@@ -62,13 +62,15 @@ angular.module('GS.serviceProvider', [])
         infoWindow.setContent('<h2>' + marker.user + '</h2>' + marker.content);
         infoWindow.open($scope.map, marker);
       });
-      // if marker 
       $scope.markers.push(marker);
-
     }
     $scope.openInfoWindow = function(e, selectedMarker) {
       e.preventDefault();
       google.maps.event.trigger(selectedMarker, 'click');
+    }
+
+    $scope.signoutSP = function () {
+      Auth.signoutProvider()
     }
   
 });

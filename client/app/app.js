@@ -25,16 +25,15 @@ angular.module('GS', [
     })
     .when('/user',{
       templateUrl: 'app/Users/Users.html',
-      controller: 'UserController'
+      controller: 'UserController',
+      authenticate: true
     })
     .when('/serviceProvider',{
        templateUrl: 'app/serviceProvider/serviceprovider.html',
-       controller: 'serviceproviderController'
+       controller: 'serviceproviderController',
+       authenticate: true
     })
-    // .when('/map', {
-    //   templateUrl: '../../GSmap/map.html',
-    //   controller: 'MapController'
-    // })
+    
     // We add our $httpInterceptor into the array
     // of interceptors. Think of it like middleware for your ajax calls
     $httpProvider.interceptors.push('AttachTokens');
@@ -65,10 +64,9 @@ angular.module('GS', [
   // and send that token to the server to see if it is a real user or hasn't expired
   // if it's not valid, we then redirect back to signin/signup
   $rootScope.$on('$routeChangeStart', function (evt, next, current) {
-    if (next.$$route && next.$$route.authenticate && !Auth.isAuthuser()) {
+    if ($location.path() === "/user" && next.$$route && next.$$route.authenticate && !Auth.isAuthuser()) {
       $location.path('/signinAsUser');
-    } 
-    if(next.$$route && next.$$route.authenticate && !Auth.isAuthprovider()){
+    }else if($location.path() !== "/user" && next.$$route && next.$$route.authenticate && !Auth.isAuthprovider()){
       $location.path('/signinAsserviceProvider');
     }
   });

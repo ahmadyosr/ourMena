@@ -1,6 +1,6 @@
 angular.module('GS.Users', [])
 
-.controller('UserController', function ($scope, Orders) {
+.controller('UserController', function ($scope, Auth, Orders) {
   // Your code here
   ///this function must call on submit click
   $scope.order = {};
@@ -29,5 +29,8 @@ angular.module('GS.Users', [])
   	.catch(function(err){
   		console.log(err);
   	})
+  }
+  $scope.signoutUser = function () {
+    Auth.signoutUser()
   }
 });
