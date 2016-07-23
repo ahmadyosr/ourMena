@@ -36,3 +36,15 @@ each view has its own html file and controller we have signin view and the user 
 app file:
 ​
 each view above must asign to an appropriate controller so app.js file has the routeProvider feature which assign a controller for each view.
+
+Map documentation:
+
+1. when the user or the service provider sign up the function:
+    navigator.geolocation.getCurrentPosition()
+    will take the position of the user from the user device location .
+2. mapOptions: this is the configuration of the main map.
+3. Then create the map with this mapOptions.
+4. serProvCircle: to create service provider circle on the map based on the location and radius of the service provider. 
+5. marker: create the dots on the main map by taking users coordinates from the user order.
+6. infoWindow: to display details of the order in the marker once the user click on the order or on the marker itself on the map.
+7. userInSerProArea function calculate if the new user's location inside one service provider if so return the name of the service provider.
