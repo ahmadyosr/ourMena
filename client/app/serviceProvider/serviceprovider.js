@@ -1,6 +1,8 @@
 angular.module('GS.serviceProvider', [])
 
 .controller('serviceproviderController', function ($scope, $window, Auth, Services) {
+   $('#user').removeClass("active");
+  $('#provider').addClass("active"); 
   $scope.data={};
   $scope.markers = [];
   ///this function called here in order to take the provider information and

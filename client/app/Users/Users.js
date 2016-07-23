@@ -1,6 +1,8 @@
 angular.module('GS.Users', [])
 
 .controller('UserController', function ($scope, Auth, Orders) {
+  $('#provider').removeClass("active");
+  $('#user').addClass("active");
   var mapOptions = {
       zoom: 13,
       center: new google.maps.LatLng(31.971715, 35.8355179),
