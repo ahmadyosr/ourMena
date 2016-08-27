@@ -64,4 +64,4 @@ After cloning the project into your local do from the root repository
 * Underscore 1.8.3
 
 ### System Architecture
-![System Architecture](System Architecture/Providers Flow chart - Page 1.png "System Architecture")
+![System Architecture](System Architecture/Providers.png "System Architecture")
