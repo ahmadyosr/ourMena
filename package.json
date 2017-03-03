@@ -13,6 +13,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.4.3",
     "express": "^4.4.5",
+    "jsonwebtoken": "^7.3.0",
     "jwt-simple": "^0.2.0",
     "mongodb": "^2.2.24",
     "mongoose": "^4.1.0"
