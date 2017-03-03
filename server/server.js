@@ -1,21 +1,17 @@
 var express = require('express');
 var mongoose = require('mongoose');
 
-var app = express();
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/ourMena';
+var MongoClient = require('mongodb').MongoClient
+MongoClient.connect(mongoURI).then((db) => {
+	console.log("Connected correctly to server");
+ 	var app = express();
 
-mongoose.connect('mongodb://localhost/greenservice');
-app.use(function (req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
-	res.header("Access-Control-Allow-Headers", "Content-Type");
-	next();
-})
-// configure our server with all the middleware and routing
-require('./config/middleware.js')(app, express);
-require('./config/routes.js')(app, express);
+	require('./config/middleware.js')(app, express);
+	require('./config/routes')(app, db);
 
-// start listening to requests on port 8000
-app.listen(8000);
+	var port = process.env.PORT || 8000;
 
-// export our app for testing and flexibility, required by index.js
-module.exports = app;
+	app.listen(port);
+}).catch(console.log)
+

@@ -1,25 +1,22 @@
-var ordersController = require('../orders/ordersController.js');
-var userController = require('../users/userController.js');
-var serviceProviderController = require('../providers/providerController.js');
 var helpers = require('./helpers.js'); // our custom middleware
 
-module.exports = function (app, express) {
+module.exports = function (app, db) {
 
-  app.post('/api/users/signinUsers', userController.signinAsUser);
-  app.post('/api/users/signupUsers', userController.signupAsUser);
-  app.get('/api/users/signedinUser', userController.checkAuthUser);
-  app.post('/api/users/signinServiceProvider', serviceProviderController.signinAsServiceProvider);
-  app.post('/api/users/signupServiceProvider', serviceProviderController.signupAsProvider);
-
-  // authentication middleware used to decode token and made available on the request
-  //app.use('/api/user', helpers.decode);
-  app.post('/api/orders/', ordersController.allOrders);
-  app.post('/api/order/', helpers.decode, ordersController.newOrder);
-  app.post('/api/SPinfo', serviceProviderController.getSPinfo);
-  app.post('/api/delivered', ordersController.delivered)
-
-  // If a request is sent somewhere other than the routes above,
-  // send it through our custom error handler
+  app.post('/addStudent', function (req, res, next) {
+    console.log(req.body)
+    db.collection('students').insert({
+      name: req.body.name,
+      major: req.body.major,
+      gpa: req.body.gpa || null,
+      video: req.body.video || null,
+      pic: req.body.pic || null,
+      cost: req.body.cost || null,
+      story: req.body.story || null
+    }).then(result => {
+      console.log(result)
+    })
+  })
+  
   app.use(helpers.errorLogger);
   app.use(helpers.errorHandler);
 };
